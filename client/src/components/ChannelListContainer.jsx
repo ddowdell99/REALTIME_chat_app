@@ -12,7 +12,7 @@ const SideBar = () => {
     <div className='channel-list__sidebar'>
       <div className='channel-list__sidebar__icon1'>
         <div className='icon1__inner'>
-          <img src={ ControllerIcon } alt="Pixel Controller" width="30" />
+          <img src={ControllerIcon} alt="Pixel Controller" width="30" />
         </div>
       </div>
       <div className='channel-list__sidebar__icon2'>
@@ -24,11 +24,35 @@ const SideBar = () => {
   )
 };
 
+const CompanyHeader = () => {
+  return (
+    <div className='channel-list__header'>
+      <p className='channel-list__header__text'>Player One</p>
+    </div>
+  )
+}
+
 
 const ChannelListContainer = () => {
   return (
     <>
       <SideBar />
+      <div className='channel-list__list__wrapper'>
+        <CompanyHeader />
+        <ChannelSearch />
+        <ChannelList
+          filters={{}}
+          channelRenderFilterFn={() => {}}
+
+          // This List below is a function that helps to give our own TeamChannelList the same props that the getStream ChannelList has.
+          List={(listProps) => (
+            <TeamChannelList
+              {...listProps}
+              type='team'
+            />
+          )}
+        />
+      </div>
 
     </>
   )
