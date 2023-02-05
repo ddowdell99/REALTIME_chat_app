@@ -42,13 +42,37 @@ const ChannelListContainer = () => {
         <ChannelSearch />
         <ChannelList
           filters={{}}
-          channelRenderFilterFn={() => {}}
+          channelRenderFilterFn={() => { }}
 
           // This List below is a function that helps to give our own TeamChannelList the same props that the getStream ChannelList has.
           List={(listProps) => (
             <TeamChannelList
               {...listProps}
               type='team'
+            />
+          )}
+          Preview = {(previewProps) => (
+            <TeamChannelPreview 
+              {...previewProps}
+              type='team'
+            />
+          )}
+        />
+        <ChannelList
+          filters={{}}
+          channelRenderFilterFn={() => { }}
+
+          // This List below is a function that helps to give our own TeamChannelList the same props that the getStream ChannelList has.
+          List={(listProps) => (
+            <TeamChannelList
+              {...listProps}
+              type='messaging'
+            />
+          )}
+          Preview = {(previewProps) => (
+            <TeamChannelPreview 
+              {...previewProps}
+              type='messaging'
             />
           )}
         />
