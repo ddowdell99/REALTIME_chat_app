@@ -6,8 +6,10 @@ import { ChannelSearch, TeamChannelList, TeamChannelPreview } from './';
 import ControllerIcon from '../assets/pixelcontroller.png';
 import LogoutIcon from '../assets/logout.png';
 
+const cookies = new Cookies();
+
 // Sidebar function contains a return function because it was not properly showing up without one. Not sure if this will cause problems later. 
-const SideBar = () => {
+const SideBar = ({ logout }) => {
   return (
     <div className='channel-list__sidebar'>
       <div className='channel-list__sidebar__icon1'>
@@ -16,7 +18,7 @@ const SideBar = () => {
         </div>
       </div>
       <div className='channel-list__sidebar__icon2'>
-        <div className='icon1__inner'>
+        <div className='icon1__inner' onClick={ logout }>
           <img src={LogoutIcon} alt="Logout" width="20" />
         </div>
       </div>
@@ -34,9 +36,21 @@ const CompanyHeader = () => {
 
 
 const ChannelListContainer = () => {
+  const logout = () => {
+      cookies.remove("token");
+      cookies.remove('userID');
+      cookies.remove('username');
+      cookies.remove('fullName');
+      cookies.remove('avatarURL');
+      cookies.remove('hashedPassword');
+      cookies.remove('phoneNumber');
+
+      window.location.reload();
+  }
+
   return (
     <>
-      <SideBar />
+      <SideBar logout = {logout}/>
       <div className='channel-list__list__wrapper'>
         <CompanyHeader />
         <ChannelSearch />

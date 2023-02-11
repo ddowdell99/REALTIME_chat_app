@@ -4,6 +4,8 @@ import axios from 'axios';
 
 import signinImage from '../assets/pixelNatureSignUp3.jpg';
 
+const cookies = new Cookies();
+
 const initialState = {
     fullName: "",
     username: "",
@@ -11,7 +13,7 @@ const initialState = {
     confirmPassword: "",
     phoneNumber: "",
     avatarURL: "",
-}
+};
 
 const Auth = () => {
 
@@ -22,10 +24,33 @@ const Auth = () => {
         setForm({ ...form, [e.target.name]: e.target.value });
      };
     
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // Pulling the data from the current form that was handled with the handleChange function
+        const { fullName, username, password, phoneNumber, avatarURL } = form;
 
+        const URL = 'http://localhost:5000/auth';
+
+        // Posting the data to our backend server 5000. We destructure the data we are given back after posting to our server. 
+        const { data: { token, userID, hashedPassword } } = await axios.post(`${URL}/${isSignup ? 'signup': 'login'}`, {
+            // Below is data being posted to backend
+            username, password, fullName, phoneNumber, avatarURL
+        });
+
+        cookies.set('token', token);
+        cookies.set('username', username);
+        cookies.set('fullName', fullName);
+        cookies.set('userID', userID);
+
+        if (isSignup) {
+            cookies.set('phoneNumber', phoneNumber);
+            cookies.set('avatarURL', avatarURL);
+            cookies.set('hashedPassword', hashedPassword);
+        }
+
+        // Reload the entire page so that auth token can be filled and actual chat messenger can open
+        window.location.reload();
     }
 
     const switchMode = () => {
