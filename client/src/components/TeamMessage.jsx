@@ -1,9 +1,9 @@
 import React from 'react'
 
-const TeamMessage = () => {
+const TeamMessage = ( { Message }) => {
   return (
     <div>
-        ream message
+        {console.log(Message)}
     </div>
   )
 }

@@ -39,7 +39,7 @@ const App = () => {
     <div className='app__wrapper'>
 
       {/* Below theme could be switched but need to look more into stream docs. */}
-      <Chat client={client} theme='team light'>
+      <Chat client={client} theme='team dark'>
         <ChannelListContainer
           isCreating={isCreating}
           setIsCreating={setIsCreating}

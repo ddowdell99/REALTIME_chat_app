@@ -29,7 +29,7 @@ const SideBar = ({ logout }) => {
 const CompanyHeader = () => {
   return (
     <div className='channel-list__header'>
-      <p className='channel-list__header__text'>Player One</p>
+      <p className='channel-list__header__text'>Player Two</p>
     </div>
   )
 }
