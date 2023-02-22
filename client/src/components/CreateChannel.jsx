@@ -30,6 +30,7 @@ const CreateChannel = ( { createType, setIsCreating }) => {
         <CloseCreateChannel setIsCreating={setIsCreating}/>
       </div>
       {createType === 'team' && <ChannelNameInput channelName={channelName} setChannelName={setChannelName} /> }
+      <UserList />
     </div>
   )
 }
