@@ -5,6 +5,7 @@ import { UserList } from './';
 import { CloseCreateChannel } from '../assets';
 
 const ChannelNameInput = ({ channelName = '', setChannelName }) => {
+
   const handleChange = (event) => {
     event.preventDefault();
 
@@ -14,23 +15,26 @@ const ChannelNameInput = ({ channelName = '', setChannelName }) => {
   return (
     <div className='channel-name-input__wrapper'>
       <p>Name</p>
-      <input value={channelName} onChange={handleChange} placeholder='channel-name'/>
+      <input value={channelName} onChange={handleChange} placeholder='channel-name' />
       <p>Add Members</p>
     </div>
   )
 }
 
-const CreateChannel = ( { createType, setIsCreating }) => {
+const CreateChannel = ({ createType, setIsCreating }) => {
+  // Using chatContext as a hook to grab current user information. Hook comes from stream
+  const { client, setActiveChannel } = useChatContext();
+  const [selectedUsers, setSelectedUsers] = useState([client.userID || ''])
   const [channelName, setChannelName] = useState('');
 
   return (
     <div className='create-channel__container'>
       <div className='create-channel__header'>
-        <p>{createType === 'team' ? 'Create a New Channel': 'Send a Direct Message'}</p>
-        <CloseCreateChannel setIsCreating={setIsCreating}/>
+        <p>{createType === 'team' ? 'Create a New Channel' : 'Send a Direct Message'}</p>
+        <CloseCreateChannel setIsCreating={setIsCreating} />
       </div>
-      {createType === 'team' && <ChannelNameInput channelName={channelName} setChannelName={setChannelName} /> }
-      <UserList />
+      {createType === 'team' && <ChannelNameInput channelName={channelName} setChannelName={setChannelName} />}
+      <UserList setSelectedUsers={setSelectedUsers}  />
     </div>
   )
 }
