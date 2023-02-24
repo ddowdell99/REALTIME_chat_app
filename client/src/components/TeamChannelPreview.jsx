@@ -1,7 +1,7 @@
 import React from "react";
 import { Avatar, useChatContext } from "stream-chat-react";
 
-const TeamChannelPreview = ({ channel, type, setToggleContainer }) => {
+const TeamChannelPreview = ({ channel, type, setToggleContainer, setIsCreating, setIsEditing, setActiveChannel }) => {
   // can use : to rename values that are pulled from an import
   const { channel: activeChannel, client } = useChatContext();
 
@@ -38,7 +38,13 @@ const TeamChannelPreview = ({ channel, type, setToggleContainer }) => {
           : "channel-preview__wrapper"
       }
       onClick={() => {
-        console.log(channel);
+        setActiveChannel(channel);
+        setIsCreating(false);
+        setIsEditing(false);
+
+        if(setToggleContainer) {
+            setToggleContainer((prevState) => !prevState)
+        }
       }}
     >
       {type === "team" ? <ChannelPreview /> : <DirectPreview />}

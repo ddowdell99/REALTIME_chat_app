@@ -93,6 +93,8 @@ const ChannelListContent = ({
               {...previewProps}
               type="team"
               setToggleContainer={setToggleContainer}
+              setIsCreating={setIsCreating}
+              setIsEditing={setIsEditing}
             />
           )}
         />
@@ -116,6 +118,8 @@ const ChannelListContent = ({
               {...previewProps}
               type="messaging"
               setToggleContainer={setToggleContainer}
+              setIsCreating={setIsCreating}
+              setIsEditing={setIsEditing}
             />
           )}
         />
