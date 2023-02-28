@@ -28,14 +28,14 @@ const Auth = () => {
         e.preventDefault();
 
         // Pulling the data from the current form that was handled with the handleChange function
-        const { fullName, username, password, phoneNumber, avatarURL } = form;
+        const { username, password, phoneNumber, avatarURL } = form;
 
         const URL = 'http://localhost:5000/auth';
 
         // Posting the data to our backend server 5000. We destructure the data we are given back after posting to our server. 
-        const { data: { token, userID, hashedPassword } } = await axios.post(`${URL}/${isSignup ? 'signup': 'login'}`, {
+        const { data: { token, userID, hashedPassword, fullName } } = await axios.post(`${URL}/${isSignup ? 'signup': 'login'}`, {
             // Below is data being posted to backend
-            username, password, fullName, phoneNumber, avatarURL
+            username, password, fullName: form.fullName, phoneNumber, avatarURL
         });
 
         cookies.set('token', token);
